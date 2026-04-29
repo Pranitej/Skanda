@@ -56,6 +56,9 @@ async function generatePDF(html, maxAttempts = RETRY_COUNT) {
          <html>
            <head>
              <meta charset="utf-8"/>
+             <link rel="preconnect" href="https://fonts.googleapis.com"/>
+             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+             <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
              <style>
                * {
                  -webkit-print-color-adjust: exact !important;
@@ -66,7 +69,7 @@ async function generatePDF(html, maxAttempts = RETRY_COUNT) {
                html, body {
                  margin: 0;
                  padding: 0;
-                 font-family: Arial, Helvetica, sans-serif;
+                 font-family: 'Inter', Arial, sans-serif;
                }
                tr  { page-break-inside: avoid; }
                img { max-width: 100%; }
@@ -74,7 +77,6 @@ async function generatePDF(html, maxAttempts = RETRY_COUNT) {
            </head>
            <body>${html}</body>
          </html>`,
-        // networkidle0 waits for the logo image to fully load before capturing
         { waitUntil: "networkidle2", timeout: PDF_TIMEOUT_MS },
       );
 
