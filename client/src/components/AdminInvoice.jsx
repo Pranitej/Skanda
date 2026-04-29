@@ -1099,18 +1099,24 @@ const AdminInvoice = forwardRef(function AdminInvoice({ invoice }, ref) {
 
       {/* Footer Notes */}
       <div style={s.footer}>
-        <div style={s.footerGrid}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "16px" }}>
           <div>
-            <p style={s.footerLabel}>Terms &amp; Conditions:</p>
+            <p style={s.footerLabel}>Work Related Terms:</p>
             <ul style={s.footerList}>
-              <li style={s.footerListItem}>
-                Payment: 50% advance, balance before delivery
-              </li>
-              <li style={s.footerListItem}>GST included in all prices</li>
-              <li style={s.footerListItem}>1 year warranty on workmanship</li>
-              <li style={s.footerListItem}>
-                Delivery: 30-45 days from advance
-              </li>
+              <li style={s.footerListItem}>Material and manpower supply as per the agreed quote and design.</li>
+              <li style={s.footerListItem}>Minimum of 60 days to complete and may vary based on project size.</li>
+              <li style={s.footerListItem}>Any modifications are done with mutual agreement and any additional cost shall be borne by the client.</li>
+              <li style={s.footerListItem}>2 years free service and 10 years warranty — void if final payment is not completed.</li>
+            </ul>
+          </div>
+          <div>
+            <p style={s.footerLabel}>Payment Related Terms:</p>
+            <ul style={s.footerList}>
+              <li style={s.footerListItem}>10% advance on order confirmation.</li>
+              <li style={s.footerListItem}>40% before Ceiling, Wiring, Putty &amp; Primer work.</li>
+              <li style={s.footerListItem}>40% before material reaches site.</li>
+              <li style={s.footerListItem}>5% after installation &amp; before Final Paint and Deep Cleaning. Final 5% before handover.</li>
+              <li style={s.footerListItem}>Any extra work, changes, or delays in payment will be charged / may extend the timeline accordingly.</li>
             </ul>
           </div>
           <div style={s.footerRight}>

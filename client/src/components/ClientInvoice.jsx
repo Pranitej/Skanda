@@ -962,27 +962,36 @@ const ClientInvoice = forwardRef(({ invoice }, ref) => {
 
       {/* Terms and Footer */}
       <div style={s.footer}>
-        <div style={s.footerGrid}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "16px", fontSize: "10px", color: "#4b5563" }}>
           <div>
             <p style={s.footerLabel}>Contact Details:</p>
-            <p style={{ margin: 0 }}>
-              9700360963 | 9866565057 | 9246893307 | 7799677762
-            </p>
-            <p style={{ margin: 0 }}>interior.skanda@gmail.com</p>
+            <p style={{ margin: 0 }}>9700360963 | 9866565057</p>
+            <p style={{ margin: 0 }}>9246893307 | 7799677762</p>
+            <p style={{ margin: 0 }}>industry.skanda@gmail.com</p>
           </div>
           <div>
-            <p style={s.footerLabel}>Terms:</p>
+            <p style={s.footerLabel}>Work Related Terms:</p>
             <ul style={s.footerList}>
-              <li>Quotation valid for 30 days</li>
-              <li>Final values based on site measurement</li>
-              <li>40% advance, 60% on completion</li>
+              <li>Material and manpower supply as per the agreed quote and design.</li>
+              <li>Minimum of 60 days to complete and may vary based on project size.</li>
+              <li>Any modifications are done with mutual agreement and any additional cost shall be borne by the client.</li>
+              <li>2 years free service and 10 years warranty — void if final payment is not completed.</li>
+            </ul>
+          </div>
+          <div>
+            <p style={s.footerLabel}>Payment Related Terms:</p>
+            <ul style={s.footerList}>
+              <li>10% advance on order confirmation.</li>
+              <li>40% before Ceiling, Wiring, Putty &amp; Primer work.</li>
+              <li>40% before material reaches site.</li>
+              <li>5% after installation &amp; before Final Paint and Deep Cleaning. Final 5% before handover.</li>
+              <li>Any extra work, changes, or delays in payment will be charged / may extend the timeline accordingly.</li>
             </ul>
           </div>
         </div>
         <div style={s.footerNote}>
           <p style={{ margin: 0 }}>
-            Thank you for considering Skanda Industries. We look forward to
-            serving you.
+            Thank you for considering Skanda Industries. We look forward to serving you.
           </p>
         </div>
       </div>
