@@ -167,7 +167,7 @@ export default function History() {
       const res = await api.post(
         "/pdf/render",
         { html },
-        { responseType: "blob" },
+        { responseType: "blob", timeout: 90_000 },
       );
 
       const blob = new Blob([res.data], { type: "application/pdf" });

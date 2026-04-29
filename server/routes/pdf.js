@@ -7,10 +7,10 @@ const router = express.Router();
 // ─── Config ───────────────────────────────────────────────────────────────────
 const MAX_CONCURRENT = 2;
 const MAX_HTML_BYTES = 512_000;
-const PDF_TIMEOUT_MS = 45_000;
+const PDF_TIMEOUT_MS = 60_000;
 const BROWSER_TIMEOUT_MS = 60_000;
-const RETRY_COUNT = 2;
-const SLOT_LEASE_MS = PDF_TIMEOUT_MS + 10_000; // 55s safety reset
+const RETRY_COUNT = 3;
+const SLOT_LEASE_MS = PDF_TIMEOUT_MS + 15_000; // 75s safety reset
 
 // ─── Concurrency tracker ──────────────────────────────────────────────────────
 const renderState = {
@@ -27,10 +27,10 @@ const renderState = {
 };
 
 // ─── PDF generation ───────────────────────────────────────────────────────────
-async function generatePDF(html, retries = RETRY_COUNT) {
+async function generatePDF(html, maxAttempts = RETRY_COUNT) {
   let browser = null;
 
-  for (let attempt = 1; attempt <= retries; attempt++) {
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     try {
       browser = await puppeteer.launch({
         headless: true,
@@ -39,6 +39,10 @@ async function generatePDF(html, retries = RETRY_COUNT) {
           "--disable-setuid-sandbox",
           "--disable-dev-shm-usage",
           "--disable-gpu",
+          "--disable-extensions",
+          "--disable-background-networking",
+          "--disable-default-apps",
+          "--no-first-run",
         ],
         timeout: BROWSER_TIMEOUT_MS,
       });
@@ -71,7 +75,7 @@ async function generatePDF(html, retries = RETRY_COUNT) {
            <body>${html}</body>
          </html>`,
         // networkidle0 waits for the logo image to fully load before capturing
-        { waitUntil: "networkidle0", timeout: PDF_TIMEOUT_MS },
+        { waitUntil: "networkidle2", timeout: PDF_TIMEOUT_MS },
       );
 
       const pdfBuffer = await page.pdf({
@@ -85,7 +89,7 @@ async function generatePDF(html, retries = RETRY_COUNT) {
       return pdfBuffer;
     } catch (err) {
       console.error(
-        `[PDF] Attempt ${attempt}/${retries} failed: ${err.message}`,
+        `[PDF] Attempt ${attempt}/${maxAttempts} failed: ${err.message}`,
       );
       if (browser) {
         try {
@@ -93,7 +97,7 @@ async function generatePDF(html, retries = RETRY_COUNT) {
         } catch (_) {}
         browser = null;
       }
-      if (attempt === retries) throw err;
+      if (attempt === maxAttempts) throw err;
       await new Promise((r) => setTimeout(r, attempt * 600));
     }
   }
@@ -101,10 +105,11 @@ async function generatePDF(html, retries = RETRY_COUNT) {
 
 // Hard wall-clock timeout — frees the slot even if Puppeteer hangs internally
 function generatePDFWithTimeout(html) {
+  const hardLimit = PDF_TIMEOUT_MS * RETRY_COUNT + 5_000;
   return new Promise((resolve, reject) => {
     const timer = setTimeout(() => {
-      reject(new Error(`PDF generation timed out after ${PDF_TIMEOUT_MS}ms`));
-    }, PDF_TIMEOUT_MS);
+      reject(new Error(`PDF generation timed out after ${hardLimit}ms`));
+    }, hardLimit);
 
     generatePDF(html)
       .then((buf) => {

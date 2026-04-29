@@ -77,7 +77,7 @@ export default function ComparePage() {
       const res = await API.post(
         "/pdf/render",
         { html },
-        { responseType: "blob" },
+        { responseType: "blob", timeout: 90_000 },
       );
 
       const blob = new Blob([res.data], { type: "application/pdf" });
