@@ -5,6 +5,7 @@ import { formatINR } from "../utils/calculations";
 export default function ExtrasEditor({ extras, setExtras }) {
   const extrasConfig = ROOM_CONFIG.extras || [];
   const [collapsedExtras, setCollapsedExtras] = useState({});
+  const [pendingOther, setPendingOther] = useState(null);
 
   /* -----------------------------------------
       SAFE INPUT NORMALIZER
@@ -144,11 +145,9 @@ export default function ExtrasEditor({ extras, setExtras }) {
     setExtras(extras.filter((e) => e.id !== id));
   };
 
-  const handleSelectExtra = (key) => {
-    if (!key) return;
+  const addExtra = (key, customLabel) => {
     const cfg = getExtraConfig(key);
     if (!cfg) return;
-    if (extras.some((ex) => ex.key === key)) return;
 
     let inputs = safeInputs({});
     let total = 0;
@@ -185,13 +184,31 @@ export default function ExtrasEditor({ extras, setExtras }) {
     const newExtra = {
       id: Date.now(),
       key: cfg.key,
-      label: cfg.label,
+      label: customLabel || cfg.label,
       type: cfg.type,
       inputs,
       total,
     };
 
     setExtras([...extras, newExtra]);
+  };
+
+  const handleSelectExtra = (key) => {
+    if (!key) return;
+    if (key === "other") {
+      setPendingOther("");
+      return;
+    }
+    addExtra(key);
+  };
+
+  const handleAddOther = () => {
+    addExtra("other", pendingOther.trim() || "Other");
+    setPendingOther(null);
+  };
+
+  const updateExtraLabel = (id, label) => {
+    setExtras(extras.map((ex) => (ex.id === id ? { ...ex, label } : ex)));
   };
 
   const updateField = (id, type, value) => {
@@ -335,25 +352,51 @@ export default function ExtrasEditor({ extras, setExtras }) {
 
         {/* Add Extra Dropdown */}
         <div className="flex justify-end gap-2 w-full">
-          {/* Mobile: Full width, Desktop: Fixed width */}
-          <select
-            className="flex-1 min-w-0 px-3 py-2 text-sm bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-white sm:w-auto sm:flex-none sm:min-w-[200px]"
-            onChange={(e) => {
-              handleSelectExtra(e.target.value);
-              e.target.value = "";
-            }}
-          >
-            <option value="" className="text-gray-500 dark:text-gray-400">
-              + Add Extra
-            </option>
-            {extrasConfig.map((cfg) =>
-              extras.some((e) => e.key === cfg.key) ? null : (
+          {pendingOther !== null ? (
+            <div className="flex gap-2 flex-1 sm:flex-none">
+              <input
+                type="text"
+                autoFocus
+                placeholder="Enter service name"
+                value={pendingOther}
+                onChange={(e) => setPendingOther(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") handleAddOther();
+                  if (e.key === "Escape") setPendingOther(null);
+                }}
+                className="flex-1 min-w-0 px-3 py-2 text-sm bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-white"
+              />
+              <button
+                onClick={handleAddOther}
+                className="px-3 py-2 text-sm bg-blue-500 hover:bg-blue-600 text-white rounded-lg"
+              >
+                Add
+              </button>
+              <button
+                onClick={() => setPendingOther(null)}
+                className="px-3 py-2 text-sm bg-gray-200 hover:bg-gray-300 dark:bg-gray-600 dark:hover:bg-gray-500 text-gray-700 dark:text-white rounded-lg"
+              >
+                Cancel
+              </button>
+            </div>
+          ) : (
+            <select
+              className="flex-1 min-w-0 px-3 py-2 text-sm bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-blue-500 text-gray-900 dark:text-white sm:w-auto sm:flex-none sm:min-w-[200px]"
+              onChange={(e) => {
+                handleSelectExtra(e.target.value);
+                e.target.value = "";
+              }}
+            >
+              <option value="" className="text-gray-500 dark:text-gray-400">
+                + Add Extra
+              </option>
+              {extrasConfig.map((cfg) => (
                 <option key={cfg.key} value={cfg.key}>
                   {cfg.label}
                 </option>
-              )
-            )}
-          </select>
+              ))}
+            </select>
+          )}
         </div>
       </div>
 
@@ -412,9 +455,21 @@ export default function ExtrasEditor({ extras, setExtras }) {
                       </svg>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2">
-                          <h4 className="font-medium text-gray-800 dark:text-white truncate">
-                            {ex.label}
-                          </h4>
+                          {ex.key === "other" ? (
+                            <input
+                              type="text"
+                              value={ex.label}
+                              onClick={(e) => e.stopPropagation()}
+                              onChange={(e) =>
+                                updateExtraLabel(ex.id, e.target.value)
+                              }
+                              className="font-medium text-gray-800 dark:text-white bg-transparent border-b border-gray-400 dark:border-gray-500 focus:outline-none focus:border-blue-500 dark:focus:border-blue-400 min-w-0 w-auto max-w-[160px]"
+                            />
+                          ) : (
+                            <h4 className="font-medium text-gray-800 dark:text-white truncate">
+                              {ex.label}
+                            </h4>
+                          )}
                           <span
                             className={`px-1.5 py-0.5 rounded text-xs ${
                               ex.type === "ceiling"

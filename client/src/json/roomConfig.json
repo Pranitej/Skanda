@@ -1,10 +1,16 @@
 {
   "defaultDimensions": {
     "height": 9,
-    "width": 1,
+    "width": 0,
     "depth": 1
   },
   "invoiceTypes": ["Standard", "Advanced", "Premium", "Luxury"],
+  "invoiceTypeRates": {
+    "Standard": 750,
+    "Advanced": 900,
+    "Premium": 1050,
+    "Luxury": 1200
+  },
   "rooms": [
     {
       "name": "Bedroom",
@@ -12,42 +18,42 @@
         {
           "name": "Bed",
           "defaultFrame": { "height": 0, "width": 0 },
-          "defaultBox": { "height": 6.5, "width": 6, "depth": 1.5 }
+          "defaultBox": { "height": 6.5, "width": 0, "depth": 1.5 }
         },
         {
           "name": "Walk-In Wardrobe",
-          "defaultFrame": { "height": 2, "width": 2 },
-          "defaultBox": { "height": 7, "width": 2, "depth": 1.5 }
+          "defaultFrame": { "height": 2, "width": 0 },
+          "defaultBox": { "height": 7, "width": 0, "depth": 1.5 }
         },
         {
           "name": "Seating Unit",
           "defaultFrame": { "height": 0, "width": 0 },
-          "defaultBox": { "height": 3, "width": 5, "depth": 1.5 }
+          "defaultBox": { "height": 3, "width": 0, "depth": 1.5 }
         },
         {
           "name": "Wardrobe",
-          "defaultFrame": { "height": 2, "width": 2 },
-          "defaultBox": { "height": 7, "width": 2, "depth": 1.5 }
+          "defaultFrame": { "height": 2, "width": 0 },
+          "defaultBox": { "height": 7, "width": 0, "depth": 1.5 }
         },
         {
           "name": "TV Unit",
           "defaultFrame": { "height": 0, "width": 0 },
-          "defaultBox": { "height": 5, "width": 4, "depth": 1 }
+          "defaultBox": { "height": 5, "width": 0, "depth": 1 }
         },
         {
           "name": "Work Station",
-          "defaultFrame": { "height": 2.6, "width": 4 },
-          "defaultBox": { "height": 4.5, "width": 4, "depth": 1 }
+          "defaultFrame": { "height": 2.6, "width": 0 },
+          "defaultBox": { "height": 4.5, "width": 0, "depth": 1 }
         },
         {
           "name": "Dressing Unit",
           "defaultFrame": { "height": 0, "width": 0 },
-          "defaultBox": { "height": 7, "width": 2, "depth": 1 }
+          "defaultBox": { "height": 7, "width": 0, "depth": 1 }
         },
         {
           "name": "Arch",
           "defaultFrame": { "height": 0, "width": 0 },
-          "defaultBox": { "height": 6.5, "width": 2, "depth": 1.5 }
+          "defaultBox": { "height": 6.5, "width": 0, "depth": 1.5 }
         },
         {
           "name": "Other"
@@ -90,12 +96,12 @@
         {
           "name": "TV Unit",
           "defaultFrame": { "height": 0, "width": 0 },
-          "defaultBox": { "height": 9, "width": 6, "depth": 1 }
+          "defaultBox": { "height": 9, "width": 0, "depth": 1 }
         },
         {
           "name": "Arch",
           "defaultFrame": { "height": 0, "width": 0 },
-          "defaultBox": { "height": 6.5, "width": 2, "depth": 1.5 }
+          "defaultBox": { "height": 6.5, "width": 0, "depth": 1.5 }
         },
         {
           "name": "Showcase",
@@ -126,28 +132,28 @@
       "items": [
         {
           "name": "Base Unit",
-          "defaultFrame": { "height": 2.5, "width": 8 },
-          "defaultBox": { "height": 2.5, "width": 8, "depth": 2 }
+          "defaultFrame": { "height": 2.5, "width": 0 },
+          "defaultBox": { "height": 2.5, "width": 0, "depth": 2 }
         },
         {
           "name": "Wall Unit/Overhead",
-          "defaultFrame": { "height": 2, "width": 8 },
-          "defaultBox": { "height": 2, "width": 8, "depth": 1 }
+          "defaultFrame": { "height": 2, "width": 0 },
+          "defaultBox": { "height": 2, "width": 0, "depth": 1 }
         },
         {
           "name": "Loft",
-          "defaultFrame": { "height": 2, "width": 8 },
+          "defaultFrame": { "height": 2, "width": 0 },
           "defaultBox": { "height": 0, "width": 0, "depth": 1 }
         },
         {
           "name": "Breakfast Counter/Island table",
           "defaultFrame": { "height": 0, "width": 0 },
-          "defaultBox": { "height": 2.5, "width": 4, "depth": 2 }
+          "defaultBox": { "height": 2.5, "width": 0, "depth": 2 }
         },
         {
           "name": "Tall Unit / Pantry box",
           "defaultFrame": { "height": 0, "width": 0 },
-          "defaultBox": { "height": 7, "width": 2, "depth": 2 }
+          "defaultBox": { "height": 7, "width": 0, "depth": 2 }
         },
         {
           "name": "Other"
@@ -179,8 +185,8 @@
       "items": [
         {
           "name": "Crockery Unit",
-          "defaultFrame": { "height": 2.5, "width": 4 },
-          "defaultBox": { "height": 4.5, "width": 4, "depth": 1 }
+          "defaultFrame": { "height": 2.5, "width": 0 },
+          "defaultBox": { "height": 4.5, "width": 0, "depth": 1 }
         },
         {
           "name": "Other"
@@ -195,8 +201,8 @@
       "items": [
         {
           "name": "Pooja Unit",
-          "defaultFrame": { "height": 5, "width": 4 },
-          "defaultBox": { "height": 2, "width": 4, "depth": 1.5 }
+          "defaultFrame": { "height": 5, "width": 0 },
+          "defaultBox": { "height": 2, "width": 0, "depth": 1.5 }
         },
         {
           "name": "Other"
@@ -212,21 +218,21 @@
         {
           "name": "Utility Area",
           "defaultFrame": { "height": 0, "width": 0 },
-          "defaultBox": { "height": 3, "width": 3, "depth": 1 }
+          "defaultBox": { "height": 3, "width": 0, "depth": 1 }
         },
         {
           "name": "Shoe Rack",
           "defaultFrame": { "height": 0, "width": 0 },
-          "defaultBox": { "height": 3, "width": 4, "depth": 1 }
+          "defaultBox": { "height": 3, "width": 0, "depth": 1 }
         },
         {
           "name": "Wash Basin",
           "defaultFrame": { "height": 0, "width": 0 },
-          "defaultBox": { "height": 2.5, "width": 4, "depth": 1.5 }
+          "defaultBox": { "height": 2.5, "width": 0, "depth": 1.5 }
         },
         {
           "name": "Main Door Panelling",
-          "defaultFrame": { "height": 10, "width": 3 },
+          "defaultFrame": { "height": 10, "width": 0 },
           "defaultBox": { "height": 0, "width": 0, "depth": 1 }
         },
         {
@@ -439,8 +445,8 @@
     {
       "key": "other",
       "label": "Other",
-      "type": "area_based",
-      "unitPrice": 0
+      "type": "fixed",
+      "price": 0
     }
   ]
 }
