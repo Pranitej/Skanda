@@ -87,7 +87,8 @@
         { "name": "Rotating Clothes Rack", "price": 4000 },
         { "name": "Side Mount 3 Shelf", "price": 15000 },
         { "name": "Revolving Mirror", "price": 10000 },
-        { "name": "Multi-Functional Corner Rack", "price": 25000 }
+        { "name": "Multi-Functional Corner Rack", "price": 25000 },
+        { "name": "Other", "price": 0 }
       ]
     },
     {
@@ -124,9 +125,12 @@
         "Bar Counter",
         "Other"
       ],
-      "accessories": []
+      "accessories": [
+        { "name": "Sofas", "price": 0 },
+        { "name": "Recliners", "price": 0 },
+        { "name": "Other", "price": 0 }
+      ]
     },
-
     {
       "name": "Kitchen",
       "items": [
@@ -177,7 +181,15 @@
         { "name": "Rolling Shutter PVC", "price": 20000 },
         { "name": "Rolling Shutter Glass", "price": 25000 },
         { "name": "Tandem Basket", "price": 5000 },
-        { "name": "Stainless Steel Basket", "price": 3500 }
+        { "name": "Stainless Steel Basket", "price": 3500 },
+        { "name": "Sink", "price": 0 },
+        { "name": "Smart Sink", "price": 0 },
+        { "name": "Chimney", "price": 0 },
+        { "name": "Hob", "price": 0 },
+        { "name": "Overhead Purifier", "price": 0 },
+        { "name": "Under mount Purifier", "price": 0 },
+        { "name": "Wash Basin", "price": 0 },
+        { "name": "Other", "price": 0 }
       ]
     },
     {
@@ -193,7 +205,10 @@
         }
       ],
       "descriptions": ["Dining Room", "Other"],
-      "accessories": [{ "name": "Draw", "price": 5000 }]
+      "accessories": [
+        { "name": "Draw", "price": 5000 },
+        { "name": "Other", "price": 0 }
+      ]
     },
 
     {
@@ -209,7 +224,10 @@
         }
       ],
       "descriptions": ["Pooja Room", "Prayer Area", "Other"],
-      "accessories": [{ "name": "Door", "price": 20000 }]
+      "accessories": [
+        { "name": "Door", "price": 20000 },
+        { "name": "Other", "price": 0 }
+      ]
     },
 
     {
@@ -240,7 +258,10 @@
         }
       ],
       "descriptions": ["Other"],
-      "accessories": [{ "name": "Mesh Door", "price": 10000 }]
+      "accessories": [
+        { "name": "Mesh Door", "price": 10000 },
+        { "name": "Other", "price": 0 }
+      ]
     }
   ],
   "extras": [
